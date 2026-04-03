@@ -1,3 +1,32 @@
-# Godot 4+ specific ignores
+# Godot 4 - Solo Project .gitignore
+
+# Import cache (auto-generated, never needed in version control)
 .godot/
-/android/
+
+# Godot 4.4+ UID files (safe to skip for solo projects)
+*.uid
+
+# Export presets (may contain signing keys or sensitive paths)
+export_presets.cfg
+
+# Exported builds (add/adjust folders to match your export output paths)
+builds/
+exports/
+*.exe
+*.x86_64
+*.arm64
+*.apk
+*.aab
+*.ipa
+*.dmg
+*.app
+
+# macOS junk
+.DS_Store
+
+# Windows junk
+Thumbs.db
+Desktop.ini
+
+# Linux junk
+*~
