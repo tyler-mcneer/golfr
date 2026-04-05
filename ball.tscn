@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://br48bkhwigaqc"]
+
+[ext_resource type="Script" uid="uid://bnar4mpowyn5v" path="res://ball.gd" id="1_x8fbi"]
+[ext_resource type="Texture2D" uid="uid://e40f2by8fy6y" path="res://assets/sprites/tile_0009.png" id="2_41u45"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktgx5"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
+radius = 9.0
+
+[node name="Ball" type="RigidBody2D" groups=["golf_ball"] unique_id=274903556]
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("1_x8fbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=505858842]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_41u45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=631409523]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_ktgx5")
+
+[node name="AimArrow" type="Node2D" parent="." unique_id=821634809]
+
+[node name="arrow_line" type="Line2D" parent="AimArrow" unique_id=518488842]
+points = PackedVector2Array(0, 0, 40, 0)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=100000001]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=100000002]
+shape = SubResource("CircleShape2D_detect")

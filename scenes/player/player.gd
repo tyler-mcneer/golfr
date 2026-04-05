@@ -31,6 +31,8 @@ var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
 var wall_jump_timer: float = 0.0
 var dash_direction: float = 1.0  # 1 for right, -1 for left
+var movement_locked: bool = false
+var is_invincible: bool = false
 
 # --- Animation State ---
 enum AnimationState { IDLE, RUN, JUMP, FALL, WALL_SLIDE, DASH }
@@ -43,15 +45,27 @@ var current_animation: AnimationState = AnimationState.IDLE
 @onready var wall_right: RayCast2D = $WallRaycasts/wall_right
 @onready var dash_indicator: Polygon2D = $DashIndicator
 
+func _ready() -> void:
+	var balls := get_tree().get_nodes_in_group("golf_ball")
+	if balls.size() > 0:
+		balls[0].player_lock.connect(_on_player_lock)
+
+func _on_player_lock(locked: bool) -> void:
+	movement_locked = locked
+	is_invincible = locked
+	if locked:
+		velocity.x = 0.0
+
 func _physics_process(delta: float) -> void:
 	#_handle_dash_timer(delta)
 	_apply_gravity(delta)
 	_handle_coyote_timer(delta)
-	_handle_jump_buffer(delta)
-	_handle_jump()
-	_handle_wall_jump()
-	_handle_dash()
-	_handle_horizontal_movement(delta)
+	if not movement_locked:
+		_handle_jump_buffer(delta)
+		_handle_jump()
+		_handle_wall_jump()
+		_handle_dash()
+		_handle_horizontal_movement(delta)
 	_refresh_dash_on_landing()
 	_update_animation()
 	move_and_slide()

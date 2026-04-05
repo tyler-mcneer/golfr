@@ -21,7 +21,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jxqw"]
 height = 24.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1186497930]
+[node name="Player" type="CharacterBody2D" groups=["player"] unique_id=1186497930]
+collision_layer = 4
 script = ExtResource("1_i3pqv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=126308861]
