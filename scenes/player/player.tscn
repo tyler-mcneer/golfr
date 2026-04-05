@@ -21,7 +21,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jxqw"]
 height = 24.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1186497930]
+[node name="Player" type="CharacterBody2D" groups=["player"] unique_id=1186497930]
+collision_layer = 4
 script = ExtResource("1_i3pqv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=126308861]
@@ -31,3 +32,17 @@ frame_progress = 0.8192005
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1901916992]
 shape = SubResource("CapsuleShape2D_1jxqw")
+
+[node name="WallRaycasts" type="Node2D" parent="." unique_id=1875260155]
+
+[node name="wall_left" type="RayCast2D" parent="WallRaycasts" unique_id=773818869]
+target_position = Vector2(-30, 0)
+
+[node name="wall_right" type="RayCast2D" parent="WallRaycasts" unique_id=1970920260]
+target_position = Vector2(30, 0)
+
+[node name="DashIndicator" type="Polygon2D" parent="." unique_id=1777421301]
+position = Vector2(204, -1)
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-208, -24, -200, -24, -200.00003, -16, -208.00002, -16)
+uv = PackedVector2Array(-208, -32, -168, -32, -168, 0, -208, 0)

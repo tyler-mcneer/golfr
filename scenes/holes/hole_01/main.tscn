@@ -1,16 +1,39 @@
 [gd_scene format=4 uid="uid://cg7pfp0hk0067"]
 
-[ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://b53blr5bav1gv" path="res://scenes/player/player.tscn" id="2_h2yge"]
+[ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_0236h"]
+[ext_resource type="PackedScene" uid="uid://b53blr5bav1gv" path="res://scenes/player/player.tscn" id="2_g2mhj"]
+[ext_resource type="PackedScene" uid="uid://br48bkhwigaqc" path="res://ball.tscn" id="3_g2mhj"]
+[ext_resource type="PackedScene" uid="uid://chudscene0001" path="res://scenes/ui/hud.tscn" id="4_hud01"]
 
 [node name="Main" type="Node2D" unique_id=1308563668]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1435271155]
+[node name="platform" type="TileMapLayer" parent="." unique_id=1435271155]
 position = Vector2(-23, -10)
-tile_map_data = PackedByteArray("AAAIAAsAAAACAAYAAAAJAAsAAAACAAYAAAAKAAsAAAACAAYAAAAJAAoAAAACAAEAAAAKAAoAAAACAAEAAAAIAAoAAAACAAEAAAALAAoAAAACAAEAAAAMAAoAAAACAAEAAAANAAoAAAACAAEAAAAOAAoAAAACAAEAAAAPAAoAAAACAAEAAAAQAAoAAAACAAEAAAALAAsAAAACAAYAAAAMAAsAAAACAAYAAAANAAsAAAACAAYAAAAOAAsAAAACAAYAAAAPAAsAAAACAAYAAAAQAAsAAAACAAYAAAAHAAUAAAACAAYAAAAHAAYAAAACAAYAAAAHAAcAAAACAAYAAAAHAAgAAAACAAYAAAAHAAkAAAACAAYAAAAHAAoAAAACAAYAAAAHAAsAAAACAAYAAAA=")
-tile_set = ExtResource("1_0xm2m")
+tile_map_data = PackedByteArray("AAAWAAoAAAACAAEAAAAXAAoAAAACAAEAAAAYAAoAAAACAAEAAAAZAAoAAAACAAEAAAAaAAoAAAACAAEAAAAbAAoAAAACAAEAAAAcAAoAAAACAAEAAAAdAAoAAAACAAEAAAAeAAoAAAACAAEAAAAJAAsAAAACAAYAAAAIAAsAAAACAAYAAAAKAAsAAAACAAYAAAALAAsAAAACAAYAAAAMAAsAAAACAAYAAAANAAsAAAACAAYAAAAOAAsAAAACAAYAAAAPAAsAAAACAAYAAAAQAAsAAAACAAYAAAAJAAoAAAACAAEAAAAIAAoAAAACAAEAAAAKAAoAAAACAAEAAAALAAoAAAACAAEAAAAMAAoAAAACAAEAAAANAAoAAAACAAEAAAAOAAoAAAACAAEAAAAPAAoAAAACAAEAAAAQAAoAAAACAAEAAAAVAAsAAAACAAYAAAAWAAsAAAACAAYAAAAXAAsAAAACAAYAAAAYAAsAAAACAAYAAAAZAAsAAAACAAYAAAAaAAsAAAACAAYAAAAbAAsAAAACAAYAAAAcAAsAAAACAAYAAAAdAAsAAAACAAYAAAAeAAsAAAACAAYAAAAVAAoAAAACAAEAAAAfAAUAAAABAAYAAAAfAAYAAAABAAYAAAAfAAcAAAABAAYAAAAfAAgAAAABAAYAAAAfAAkAAAABAAYAAAAfAAoAAAABAAYAAAAfAAsAAAABAAYAAAAHAAsAAAADAAYAAAAHAAoAAAADAAYAAAAHAAkAAAADAAYAAAAHAAgAAAADAAYAAAAHAAcAAAADAAYAAAAHAAYAAAADAAYAAAAHAAUAAAADAAYAAAAHAAQAAAADAAYAAAAHAAMAAAADAAYAAAAHAAIAAAADAAYAAAAHAAEAAAADAAYAAAAHAAAAAAADAAYAAAAHAP//AAADAAYAAAAfAAQAAAABAAYAAAAfAAMAAAABAAYAAAAfAAIAAAABAAYAAAAfAAEAAAABAAYAAAAfAAAAAAABAAYAAAAfAP//AAABAAYAAAA=")
+tile_set = ExtResource("1_0236h")
 
-[node name="Player" parent="." unique_id=1186497930 instance=ExtResource("2_h2yge")]
+[node name="Player" parent="." unique_id=1186497930 instance=ExtResource("2_g2mhj")]
 position = Vector2(184, 16)
-SPEED = 200.0
-JUMP_VELOCITY = -300.0
+speed = 200.0
+jump_velocity = -300.0
+ground_deceleration = 1800.0
+air_deceleration = 400.0
+wall_jump_velocity_x = 200.0
+wall_jump_velocity_y = -300.0
+
+[node name="background" type="TileMapLayer" parent="." unique_id=663124205]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0236h")
+
+[node name="hazards" type="TileMapLayer" parent="." unique_id=580090822]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0236h")
+
+[node name="foreground" type="TileMapLayer" parent="." unique_id=906159683]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0236h")
+
+[node name="Ball" parent="." unique_id=274903556 instance=ExtResource("3_g2mhj")]
+position = Vector2(262, 148)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud01")]
