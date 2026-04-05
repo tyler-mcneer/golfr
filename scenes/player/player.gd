@@ -183,6 +183,12 @@ func _update_animation() -> void:
 	else:
 		new_state = AnimationState.IDLE
 
+	# Handle sprite flipping based on facing direction
+	if dash_direction < 0:
+		animated_sprite.scale.x = 1.0
+	else:
+		animated_sprite.scale.x = -1.0
+
 	# Only update if state changed to avoid restarting animations mid-cycle
 	if new_state == current_animation:
 		return
@@ -206,9 +212,3 @@ func _update_animation() -> void:
 		AnimationState.DASH:
 			animated_sprite.stop()
 			animated_sprite.frame = 1
-
-	# Handle sprite flipping based on facing direction
-	if dash_direction > 0:
-		animated_sprite.scale.x = 1.0
-	else:
-		animated_sprite.scale.x = -1.0
