@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ebs7gp7amg53"]
+
+[ext_resource type="Script" path="res://scenes/ui/ball_indicator.gd" id="1_ballindicator"]
+
+[node name="BallIndicator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ballindicator")
+
+[node name="ArrowPolygon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(14, 0, -7, -8, -4, 0, -7, 8)
+color = Color(1, 0.78, 0.06, 1)
