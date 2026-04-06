@@ -1,0 +1,107 @@
+[gd_scene format=4 uid="uid://cg7pfp0hk0067"]
+
+[ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_0votj"]
+[ext_resource type="PackedScene" uid="uid://b53blr5bav1gv" path="res://scenes/player/player.tscn" id="2_5o744"]
+[ext_resource type="PackedScene" uid="uid://br48bkhwigaqc" path="res://ball.tscn" id="3_vbvyl"]
+[ext_resource type="PackedScene" uid="uid://chudscene0001" path="res://scenes/ui/hud.tscn" id="4_6630t"]
+[ext_resource type="PackedScene" uid="uid://ce7ip7o4625aa" path="res://scenes/camera/game_camera.tscn" id="5_o3a2s"]
+[ext_resource type="PackedScene" uid="uid://crrw86l2oodm" path="res://green.tscn" id="6_5j84f"]
+[ext_resource type="Script" uid="uid://j57h0d32brvi" path="res://scenes/holes/hole_01/hole_test.gd" id="7_holetest"]
+
+[node name="Main" type="Node2D" unique_id=1308563668]
+script = ExtResource("7_holetest")
+
+[node name="platform" type="TileMapLayer" parent="." unique_id=1435271155]
+position = Vector2(-23, -10)
+tile_map_data = PackedByteArray("AAAJAAsAAAACAAYAAAAIAAsAAAACAAYAAAAKAAsAAAACAAYAAAALAAsAAAACAAYAAAAMAAsAAAACAAYAAAANAAsAAAACAAYAAAAOAAsAAAACAAYAAAAPAAsAAAACAAYAAAAQAAsAAAACAAYAAAAJAAoAAAACAAEAAAAIAAoAAAACAAEAAAAKAAoAAAACAAEAAAALAAoAAAACAAEAAAAMAAoAAAACAAEAAAANAAoAAAACAAEAAAAOAAoAAAACAAEAAAAPAAoAAAACAAEAAAAQAAoAAAACAAEAAAAHAAsAAAADAAYAAAAHAAoAAAADAAYAAAAHAAkAAAADAAYAAAAHAAgAAAADAAYAAAAHAAcAAAADAAYAAAAHAAYAAAADAAYAAAAHAAUAAAADAAYAAAAHAAQAAAADAAYAAAAHAAMAAAADAAYAAAAHAAIAAAADAAYAAAAHAAEAAAADAAYAAAAHAAAAAAADAAYAAAAHAP//AAADAAYAAABJAAoAAAACAAEAAABJAAsAAAACAAYAAABTAP//AAABAAYAAABTAAAAAAABAAYAAABTAAEAAAABAAYAAABTAAIAAAABAAYAAABTAAMAAAABAAYAAABTAAQAAAABAAYAAABTAAUAAAABAAYAAABTAAYAAAABAAYAAABTAAcAAAABAAYAAABTAAgAAAABAAYAAABTAAkAAAABAAYAAABTAAoAAAABAAYAAABTAAsAAAABAAYAAAARAAoAAAACAAEAAAASAAoAAAACAAEAAAATAAoAAAACAAEAAAAUAAoAAAACAAEAAAAVAAoAAAACAAEAAAAWAAoAAAACAAEAAAAXAAoAAAACAAEAAAAYAAoAAAACAAEAAAAZAAoAAAACAAEAAAAaAAoAAAACAAEAAAAbAAoAAAACAAEAAAAcAAoAAAACAAEAAAAdAAoAAAACAAEAAAAeAAoAAAACAAEAAAAfAAoAAAACAAEAAAAgAAoAAAACAAEAAAAhAAoAAAACAAEAAAAiAAoAAAACAAEAAAAjAAoAAAACAAEAAAAkAAoAAAACAAEAAAAlAAoAAAACAAEAAAAmAAoAAAACAAEAAAAnAAoAAAACAAEAAAAoAAoAAAACAAEAAAApAAoAAAACAAEAAAAqAAoAAAACAAEAAAArAAoAAAACAAEAAAAsAAoAAAACAAEAAAAtAAoAAAACAAEAAAAuAAoAAAACAAEAAAAvAAoAAAACAAEAAAAwAAoAAAACAAEAAAAxAAoAAAACAAEAAAAyAAoAAAACAAEAAAAzAAoAAAACAAEAAAA0AAoAAAACAAEAAAA1AAoAAAACAAEAAAA2AAoAAAACAAEAAAA3AAoAAAACAAEAAAA4AAoAAAACAAEAAAA5AAoAAAACAAEAAAA6AAoAAAACAAEAAAA7AAoAAAACAAEAAAA8AAoAAAACAAEAAAA9AAoAAAACAAEAAAA+AAoAAAACAAEAAAA/AAoAAAACAAEAAABAAAoAAAACAAEAAABBAAoAAAACAAEAAABCAAoAAAACAAEAAABDAAoAAAACAAEAAABEAAoAAAACAAEAAABFAAoAAAACAAEAAABGAAoAAAACAAEAAABHAAoAAAACAAEAAABIAAoAAAACAAEAAAARAAsAAAACAAYAAAASAAsAAAACAAYAAAATAAsAAAACAAYAAAAUAAsAAAACAAYAAAAVAAsAAAACAAYAAAAWAAsAAAACAAYAAAAXAAsAAAACAAYAAAAYAAsAAAACAAYAAAAZAAsAAAACAAYAAAAaAAsAAAACAAYAAAAbAAsAAAACAAYAAAAcAAsAAAACAAYAAAAdAAsAAAACAAYAAAAeAAsAAAACAAYAAAAfAAsAAAACAAYAAAAgAAsAAAACAAYAAAAhAAsAAAACAAYAAAAiAAsAAAACAAYAAAAjAAsAAAACAAYAAAAkAAsAAAACAAYAAAAlAAsAAAACAAYAAAAmAAsAAAACAAYAAAAnAAsAAAACAAYAAAAoAAsAAAACAAYAAAApAAsAAAACAAYAAAAqAAsAAAACAAYAAAArAAsAAAACAAYAAAAsAAsAAAACAAYAAAAtAAsAAAACAAYAAAAuAAsAAAACAAYAAAAvAAsAAAACAAYAAAAwAAsAAAACAAYAAAAxAAsAAAACAAYAAAAyAAsAAAACAAYAAAAzAAsAAAACAAYAAAA0AAsAAAACAAYAAAA1AAsAAAACAAYAAAA2AAsAAAACAAYAAAA3AAsAAAACAAYAAAA4AAsAAAACAAYAAAA5AAsAAAACAAYAAAA6AAsAAAACAAYAAAA7AAsAAAACAAYAAAA8AAsAAAACAAYAAAA9AAsAAAACAAYAAAA+AAsAAAACAAYAAAA/AAsAAAACAAYAAABHAAsAAAACAAYAAABIAAsAAAACAAYAAABGAAsAAAACAAYAAABFAAsAAAACAAYAAABEAAsAAAACAAYAAABDAAsAAAACAAYAAABCAAsAAAACAAYAAABBAAsAAAACAAYAAABAAAsAAAACAAYAAABKAAsAAAACAAYAAABLAAsAAAACAAYAAABMAAsAAAACAAYAAABNAAsAAAACAAYAAABOAAsAAAACAAYAAABPAAsAAAACAAYAAABQAAsAAAACAAYAAABRAAsAAAACAAYAAABSAAsAAAACAAYAAAA=")
+tile_set = ExtResource("1_0votj")
+
+[node name="Player" parent="." unique_id=1186497930 instance=ExtResource("2_5o744")]
+position = Vector2(184, 16)
+speed = 200.0
+jump_velocity = -300.0
+ground_deceleration = 1800.0
+air_deceleration = 400.0
+wall_jump_velocity_x = 200.0
+wall_jump_velocity_y = -300.0
+
+[node name="background" type="TileMapLayer" parent="." unique_id=663124205]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0votj")
+
+[node name="hazards" type="TileMapLayer" parent="." unique_id=580090822]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0votj")
+
+[node name="foreground" type="TileMapLayer" parent="." unique_id=906159683]
+position = Vector2(-23, -10)
+tile_set = ExtResource("1_0votj")
+
+[node name="Ball" parent="." unique_id=274903556 instance=ExtResource("3_vbvyl")]
+position = Vector2(262, 148)
+
+[node name="HUD" parent="." unique_id=623953212 instance=ExtResource("4_6630t")]
+
+[node name="GameCamera" parent="." unique_id=511757998 instance=ExtResource("5_o3a2s")]
+position = Vector2(-23, -10)
+limit_left = 0
+limit_right = 1500
+limit_smoothed = true
+
+[node name="Green" parent="." unique_id=1369089191 instance=ExtResource("6_5j84f")]
+position = Vector2(1309, 152)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=200000001]
+position = Vector2(200, 150)
+
+[node name="BallSpawn" type="Marker2D" parent="." unique_id=200000002]
+position = Vector2(250, 160)
+
+[node name="RespawnMarker" type="Node2D" parent="." unique_id=200000003]
+position = Vector2(250, 300)
+
+[node name="HoleCompleteUI" type="CanvasLayer" parent="." unique_id=200000004]
+
+[node name="Overlay" type="ColorRect" parent="HoleCompleteUI" unique_id=200000005]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="PanelContainer" parent="HoleCompleteUI" unique_id=200000006]
+custom_minimum_size = Vector2(300, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HoleCompleteUI/Panel" unique_id=200000007]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000008]
+layout_mode = 2
+text = "Hole Complete"
+horizontal_alignment = 1
+
+[node name="StrokeLabel" type="Label" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000009]
+layout_mode = 2
+text = "Strokes: 0"
+horizontal_alignment = 1
+
+[node name="BestLabel" type="Label" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000010]
+layout_mode = 2
+text = "Best: -"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000011]
+layout_mode = 2
+text = "Restart"

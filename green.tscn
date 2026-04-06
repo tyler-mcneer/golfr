@@ -1,0 +1,78 @@
+[gd_scene format=4 uid="uid://crrw86l2oodm"]
+
+[ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_ecytu"]
+[ext_resource type="Texture2D" uid="uid://lq32lt2r8vv7" path="res://assets/sprites/tile_0062.png" id="2_28gmm"]
+[ext_resource type="Texture2D" uid="uid://cactt02kck2my" path="res://assets/sprites/flag/tile_0111.png" id="3_pm5mh"]
+[ext_resource type="Texture2D" uid="uid://ruqt76wgl43n" path="res://assets/sprites/flag/tile_0112.png" id="4_6ooxt"]
+[ext_resource type="Texture2D" uid="uid://blnscvqqd42pm" path="res://assets/sprites/flag/tile_0131.png" id="5_gbt8x"]
+[ext_resource type="Script" uid="uid://bfpayac4eh8ku" path="res://green.gd" id="6_greengd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x27js"]
+size = Vector2(162, 19)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7r4fb"]
+b = Vector2(15, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhml0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pm5mh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ooxt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Green" type="Node2D" unique_id=1369089191]
+script = ExtResource("6_greengd")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=852591908]
+tile_map_data = PackedByteArray("AAAAAAEAAAACAAMAAAABAAEAAAACAAMAAAACAAEAAAACAAMAAAADAAEAAAACAAMAAAAFAAEAAAACAAMAAAAGAAEAAAACAAMAAAAHAAEAAAACAAMAAAAIAAEAAAACAAMAAAA=")
+tile_set = ExtResource("1_ecytu")
+
+[node name="GreenArea" type="Area2D" parent="." unique_id=1909195893 groups=["golf_green"]]
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="GreenDetector" type="CollisionShape2D" parent="GreenArea" unique_id=758283677]
+visible = false
+position = Vector2(81, 26.5)
+shape = SubResource("RectangleShape2D_x27js")
+
+[node name="Hole" type="Node2D" parent="." unique_id=543853701 groups=["golf_hole"]]
+position = Vector2(81, 27)
+metadata/_edit_group_ = true
+
+[node name="HoleArea" type="Area2D" parent="Hole" unique_id=768877009]
+position = Vector2(5, 5)
+collision_mask = 8
+
+[node name="HoleDetector" type="CollisionShape2D" parent="Hole/HoleArea" unique_id=389773848]
+position = Vector2(-12, -1)
+shape = SubResource("SegmentShape2D_7r4fb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hole" unique_id=1254359515]
+texture = ExtResource("2_28gmm")
+
+[node name="Line2D" type="Line2D" parent="Hole" unique_id=68334346]
+z_index = 1
+points = PackedVector2Array(-9, -7, 9, -7)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Flag" type="Node2D" parent="." unique_id=2085704484]
+position = Vector2(78, 1)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flag" unique_id=838874502]
+position = Vector2(9, -9)
+sprite_frames = SubResource("SpriteFrames_fhml0")
+frame_progress = 0.4453074
+
+[node name="Pole" type="Sprite2D" parent="Flag" unique_id=919141308]
+texture = ExtResource("5_gbt8x")
+centered = false
