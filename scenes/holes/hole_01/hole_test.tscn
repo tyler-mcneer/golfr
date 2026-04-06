@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ce7ip7o4625aa" path="res://scenes/camera/game_camera.tscn" id="5_o3a2s"]
 [ext_resource type="PackedScene" uid="uid://crrw86l2oodm" path="res://green.tscn" id="6_5j84f"]
 [ext_resource type="Script" uid="uid://j57h0d32brvi" path="res://scenes/holes/hole_01/hole_test.gd" id="7_holetest"]
+[ext_resource type="PackedScene" path="res://scenes/ui/ball_indicator.tscn" id="8_vbvyl"]
 
 [node name="Main" type="Node2D" unique_id=1308563668]
 script = ExtResource("7_holetest")
@@ -105,3 +106,8 @@ horizontal_alignment = 1
 [node name="RestartButton" type="Button" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000011]
 layout_mode = 2
 text = "Restart"
+
+[node name="BallIndicatorLayer" type="CanvasLayer" parent="." unique_id=996496745]
+layer = 10
+
+[node name="BallIndicator" parent="BallIndicatorLayer" unique_id=380008816 instance=ExtResource("8_vbvyl")]
