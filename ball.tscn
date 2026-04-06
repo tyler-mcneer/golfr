@@ -9,9 +9,8 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
 radius = 9.0
 
-[node name="Ball" type="RigidBody2D" groups=["golf_ball"] unique_id=274903556]
+[node name="Ball" type="RigidBody2D" unique_id=274903556 groups=["golf_ball"]]
 collision_layer = 8
-collision_mask = 1
 script = ExtResource("1_x8fbi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=505858842]

@@ -22,6 +22,7 @@ const BALL_STATE_RESTING   := 4
 @export var show_debug_logs: bool = true
 
 var _mode: CameraMode = CameraMode.FOLLOW_PLAYER
+var _frozen: bool = false
 
 var _player: Node2D = null
 var _ball: Node2D   = null
@@ -75,6 +76,8 @@ func _on_ball_state_changed(new_state: int) -> void:
 			_camera_target  = global_position
 
 		BALL_STATE_RESTING:
+			if _frozen:
+				return
 			if show_debug_logs:
 				print("[Camera] state: RESTING -> starting transition to player")
 			_start_transition_to_player()
@@ -183,6 +186,10 @@ func _update_transition(delta: float) -> void:
 		return
 
 	global_position = _transition_start.lerp(_transition_target, _transition_progress)
+
+
+func freeze() -> void:
+	_frozen = true
 
 
 func _finish_transition() -> void:

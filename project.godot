@@ -19,6 +19,15 @@ config/icon="res://icon.svg"
 
 GameState="*uid://deenjqkpwmru1"
 
+[global_group]
+
+golf_ball=""
+player=""
+game_camera=""
+golf_hole=""
+golf_green=""
+respawn_marker=""
+
 [input]
 
 move_right={
