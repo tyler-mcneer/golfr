@@ -13,7 +13,9 @@ var state: State = State.IN_FLIGHT
 @export var max_power: float = 800.0               # max launch speed (pixels/sec)
 @export var power_bar_fill_speed: float = 1.0      # full bar fill in 1 second
 @export var ball_bounciness: float = 0.35          # physics material bounce
-@export var ball_friction: float = 0.8             # physics material friction
+@export var ball_friction: float = 0.6             # physics material friction
+@export var linear_damp_value: float = 1.5         # overall roll distance
+@export var angular_damp_value: float = 2.0        # spin resistance after landing
 @export var rest_speed_threshold: float = 8.0      # speed below which ball is "resting"
 @export var rest_time_required: float = 0.4        # seconds below threshold before RESTING
 
@@ -39,6 +41,8 @@ var _launch_impulse: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	_update_physics_material()
+	linear_damp = linear_damp_value
+	angular_damp = angular_damp_value
 	_set_aim_arrow_visible(false)
 	player_detector.body_entered.connect(_on_player_detector_body_entered)
 
@@ -76,14 +80,25 @@ func _unhandled_input(event: InputEvent) -> void:
 # ── State: AIMING ────────────────────────────────────────────
 func _enter_aiming() -> void:
 	state = State.AIMING
+	if is_on_green:
+		var holes := get_tree().get_nodes_in_group("golf_hole")
+		if holes.size() > 0:
+			aim_angle = 0.0 if holes[0].global_position.x >= global_position.x else -PI
 	player_lock.emit(true)
 	ball_state_changed.emit(State.AIMING)
 	_set_aim_arrow_visible(true)
 	_update_aim_arrow()
 
 func _handle_aiming(delta: float) -> void:
-	var input := Input.get_axis("ui_left", "ui_right")  # -1, 0, or 1
-	aim_angle = clampf(aim_angle + input * aim_rotation_speed * delta, -PI, 0.0)
+	if is_on_green:
+		# Putter: toggle between pointing right (0) and pointing left (-PI).
+		if Input.is_action_just_pressed("ui_right"):
+			aim_angle = 0.0
+		elif Input.is_action_just_pressed("ui_left"):
+			aim_angle = -PI
+	else:
+		var input := Input.get_axis("ui_left", "ui_right")
+		aim_angle = clampf(aim_angle + input * aim_rotation_speed * delta, -PI, 0.0)
 	_update_aim_arrow()
 
 func _update_aim_arrow() -> void:
@@ -115,6 +130,7 @@ func _fire_shot() -> void:
 	_update_respawn_marker()
 
 	_set_aim_arrow_visible(false)
+	linear_damp = 0.0
 	state = State.IN_FLIGHT
 	ball_state_changed.emit(State.IN_FLIGHT)
 	stroke_taken.emit()
@@ -138,6 +154,7 @@ func _handle_in_flight(_delta: float) -> void:
 
 func _enter_resting() -> void:
 	state = State.RESTING
+	linear_damp = linear_damp_value
 	freeze = true
 	linear_velocity = Vector2.ZERO
 	player_lock.emit(false)

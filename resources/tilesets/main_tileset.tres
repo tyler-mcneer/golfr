@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://bnj4jrutbbd05"]
 
 [ext_resource type="Texture2D" uid="uid://f4ksnk217oyb" path="res://assets/sprites/tile_images/tilemap.png" id="1_6chgb"]
+[ext_resource type="PhysicsMaterial" uid="uid://greenmat001" path="res://resources/physics/green_material.tres" id="1_bfpx1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bvp3"]
 texture = ExtResource("1_6chgb")
@@ -371,8 +372,10 @@ texture_region_size = Vector2i(18, 18)
 tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
+physics_layer_0/physics_material = ExtResource("1_bfpx1")
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 0
+physics_layer_2/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Ground 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)

@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://crrw86l2oodm"]
 
-[ext_resource type="Script" uid="uid://greengd00001" path="res://green.gd" id="6_greengd"]
 [ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_ecytu"]
 [ext_resource type="Texture2D" uid="uid://lq32lt2r8vv7" path="res://assets/sprites/tile_0062.png" id="2_28gmm"]
 [ext_resource type="Texture2D" uid="uid://cactt02kck2my" path="res://assets/sprites/flag/tile_0111.png" id="3_pm5mh"]
 [ext_resource type="Texture2D" uid="uid://ruqt76wgl43n" path="res://assets/sprites/flag/tile_0112.png" id="4_6ooxt"]
 [ext_resource type="Texture2D" uid="uid://blnscvqqd42pm" path="res://assets/sprites/flag/tile_0131.png" id="5_gbt8x"]
+[ext_resource type="Script" uid="uid://bfpayac4eh8ku" path="res://green.gd" id="6_greengd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x27js"]
 size = Vector2(162, 19)

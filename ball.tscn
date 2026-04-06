@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://bnar4mpowyn5v" path="res://ball.gd" id="1_x8fbi"]
 [ext_resource type="Texture2D" uid="uid://e40f2by8fy6y" path="res://assets/sprites/tile_0009.png" id="2_41u45"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ball"]
+friction = 0.6
+rough = false
+bounce = 0.35
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktgx5"]
 radius = 9.0
 
@@ -11,6 +16,9 @@ radius = 9.0
 
 [node name="Ball" type="RigidBody2D" unique_id=274903556 groups=["golf_ball"]]
 collision_layer = 8
+physics_material_override = SubResource("PhysicsMaterial_ball")
+linear_damp = 1.5
+angular_damp = 2.0
 script = ExtResource("1_x8fbi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=505858842]
