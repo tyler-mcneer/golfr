@@ -84,6 +84,9 @@ func _enter_aiming() -> void:
 		var holes := get_tree().get_nodes_in_group("golf_hole")
 		if holes.size() > 0:
 			aim_angle = 0.0 if holes[0].global_position.x >= global_position.x else -PI
+	else:
+		var hole := get_tree().get_first_node_in_group("golf_hole")
+		aim_angle = -PI / 4.0 if hole == null or hole.global_position.x >= global_position.x else -3.0 * PI / 4.0
 	player_lock.emit(true)
 	ball_state_changed.emit(State.AIMING)
 	_set_aim_arrow_visible(true)
