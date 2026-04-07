@@ -7,6 +7,8 @@ const BALL_STATE_RESTING := 4
 const BALL_STATE_AIMING  := 1
 
 @export var arrow_screen_margin: float = 24.0
+@export var vertical_deadzone: float = 0.3
+@export var max_arrow_angle: float = PI / 4
 
 var _ball: Node2D  = null
 var _ball_state: int = -1
@@ -38,30 +40,52 @@ func _process(_delta: float) -> void:
 		_arrow.visible = false
 		return
 
-	var viewport_size := get_viewport_rect().size
-
-	# Convert ball world position to screen coordinates.
-	# cam.to_local() gives position relative to camera centre (0,0 = centre).
-	var cam_local  := cam.to_local(_ball.global_position)
-	var screen_pos := cam_local + viewport_size * 0.5
+	# Convert ball world position to viewport pixel coordinates.
+	# get_screen_center_position() + zoom avoids CanvasLayer transform interference.
+	var viewport_rect := get_viewport_rect()
+	var cam_center: Vector2 = cam.get_screen_center_position()
+	var world_offset := _ball.global_position - cam_center
+	var screen_pos: Vector2 = viewport_rect.size / 2.0 + Vector2(world_offset.x * cam.zoom.x, world_offset.y * cam.zoom.y)
 
 	# Ball is on-screen — no arrow needed.
-	if screen_pos.x >= 0.0 and screen_pos.x <= viewport_size.x \
-	and screen_pos.y >= 0.0 and screen_pos.y <= viewport_size.y:
+	if viewport_rect.has_point(screen_pos):
 		_arrow.visible = false
 		return
 
 	_arrow.visible = true
 
-	# Direction from screen centre toward ball screen position.
-	var screen_center := viewport_size * 0.5
-	var dir := (screen_pos - screen_center).normalized()
+	var center   := viewport_rect.size / 2.0
+	var margin   := arrow_screen_margin
+	var extent_x := (viewport_rect.size.x / 2.0) - margin
+	var extent_y := (viewport_rect.size.y / 2.0) - margin
 
-	# Project far along that direction then clamp to the margin inset rect.
-	var margin    := arrow_screen_margin
-	var arrow_pos := screen_center + dir * 10000.0
-	arrow_pos.x   = clampf(arrow_pos.x, margin, viewport_size.x - margin)
-	arrow_pos.y   = clampf(arrow_pos.y, margin, viewport_size.y - margin)
+	var dx: float = screen_pos.x - center.x
+	var dy: float = screen_pos.y - center.y
 
-	_arrow.position = arrow_pos
-	_arrow.rotation = dir.angle()
+	# Normalise each axis independently so both range -1..1.
+	var norm_x := clampf(dx / extent_x, -1.0, 1.0)
+	var norm_y := clampf(dy / extent_y, -1.0, 1.0)
+
+	# Clamp to the correct edge based on dominant axis.
+	var edge_x: float
+	var edge_y: float
+	if absf(norm_x) >= absf(norm_y):
+		edge_x = signf(dx) * extent_x + center.x
+		edge_y = center.y + norm_y * extent_y
+	else:
+		edge_x = center.x + norm_x * extent_x
+		edge_y = signf(dy) * extent_y + center.y
+
+	_arrow.position = Vector2(edge_x, edge_y)
+
+	# Apply dead zone then scale vertical influence; clamp via tan to enforce max_arrow_angle.
+	var norm_y_adjusted: float = 0.0
+	if absf(norm_y) > vertical_deadzone:
+		norm_y_adjusted = signf(norm_y) * (absf(norm_y) - vertical_deadzone) / (1.0 - vertical_deadzone)
+
+	# ArrowPolygon points right at rotation=0, so no offset needed.
+	var angle_vector := Vector2(
+		norm_x,
+		clampf(norm_y_adjusted, -tan(max_arrow_angle), tan(max_arrow_angle))
+	)
+	_arrow.rotation = angle_vector.angle()

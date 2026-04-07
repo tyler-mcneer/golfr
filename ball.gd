@@ -29,6 +29,7 @@ var current_power: float:
 	get:
 		return power
 var is_on_green: bool = false
+var _in_hole: bool = false
 var _power_direction: float = 1.0
 var _rest_timer: float = 0.0
 var _respawn_marker_position: Vector2 = Vector2.ZERO
@@ -84,6 +85,9 @@ func _enter_aiming() -> void:
 		var holes := get_tree().get_nodes_in_group("golf_hole")
 		if holes.size() > 0:
 			aim_angle = 0.0 if holes[0].global_position.x >= global_position.x else -PI
+	else:
+		var hole := get_tree().get_first_node_in_group("golf_hole")
+		aim_angle = -PI / 4.0 if hole == null or hole.global_position.x >= global_position.x else -3.0 * PI / 4.0
 	player_lock.emit(true)
 	ball_state_changed.emit(State.AIMING)
 	_set_aim_arrow_visible(true)
@@ -157,10 +161,15 @@ func _enter_resting() -> void:
 	linear_damp = linear_damp_value
 	freeze = true
 	linear_velocity = Vector2.ZERO
-	player_lock.emit(false)
+	if not _in_hole:
+		player_lock.emit(false)
 	ball_state_changed.emit(State.RESTING)
 
 # ── Green Detection ──────────────────────────────────────────
+func enter_hole() -> void:
+	_in_hole = true
+	player_lock.emit(true)
+
 func enter_green() -> void:
 	is_on_green = true
 
