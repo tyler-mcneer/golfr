@@ -12,6 +12,8 @@ func _ready() -> void:
 
 func _on_hole_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("golf_ball"):
+		if body.has_method("enter_hole"):
+			body.enter_hole()
 		hole_completed.emit()
 
 func _on_green_area_body_entered(body: Node2D) -> void:
