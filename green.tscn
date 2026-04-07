@@ -23,7 +23,7 @@ animations = [{
 "texture": ExtResource("4_6ooxt")
 }],
 "loop": true,
-"name": &"default",
+"name": &"flag",
 "speed": 2.0
 }]
 
@@ -55,14 +55,14 @@ collision_mask = 8
 position = Vector2(-12, -1)
 shape = SubResource("SegmentShape2D_7r4fb")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hole" unique_id=1254359515]
-texture = ExtResource("2_28gmm")
-
 [node name="Line2D" type="Line2D" parent="Hole" unique_id=68334346]
 z_index = 1
 points = PackedVector2Array(-9, -7, 9, -7)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Hole" unique_id=1217991660]
+texture = ExtResource("2_28gmm")
 
 [node name="Flag" type="Node2D" parent="." unique_id=2085704484]
 position = Vector2(78, 1)
@@ -71,7 +71,9 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flag" unique_id=838874502]
 position = Vector2(9, -9)
 sprite_frames = SubResource("SpriteFrames_fhml0")
-frame_progress = 0.4453074
+animation = &"flag"
+autoplay = "flag"
+frame_progress = 0.39463505
 
 [node name="Pole" type="Sprite2D" parent="Flag" unique_id=919141308]
 texture = ExtResource("5_gbt8x")
