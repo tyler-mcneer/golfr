@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="HoleData" format=3 uid="uid://clpmvhlvpi14p"]
+
+[ext_resource type="Script" uid="uid://b3h1ey2w0r48b" path="res://resources/hole_data/hole_data.gd" id="1_u6vp6"]
+
+[resource]
+script = ExtResource("1_u6vp6")

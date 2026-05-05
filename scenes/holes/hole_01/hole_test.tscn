@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bnj4jrutbbd05" path="res://resources/tilesets/main_tileset.tres" id="1_0votj"]
 [ext_resource type="PackedScene" uid="uid://b53blr5bav1gv" path="res://scenes/player/player.tscn" id="2_5o744"]
+[ext_resource type="Resource" uid="uid://clpmvhlvpi14p" path="res://resources/hole_data/hole_data_test.tres" id="2_6630t"]
 [ext_resource type="PackedScene" uid="uid://br48bkhwigaqc" path="res://ball.tscn" id="3_vbvyl"]
 [ext_resource type="PackedScene" uid="uid://chudscene0001" path="res://scenes/ui/hud.tscn" id="4_6630t"]
 [ext_resource type="PackedScene" uid="uid://ce7ip7o4625aa" path="res://scenes/camera/game_camera.tscn" id="5_o3a2s"]
@@ -11,6 +12,7 @@
 
 [node name="Main" type="Node2D" unique_id=1308563668]
 script = ExtResource("7_holetest")
+hole_data = ExtResource("2_6630t")
 
 [node name="platform" type="TileMapLayer" parent="." unique_id=1435271155]
 position = Vector2(-23, -10)
