@@ -514,12 +514,11 @@ Not required currently. Revisit if repository exceeds 1–2GB or asset replaceme
 
 Roughly prioritised — subject to change:
 
-- Implement GameState autoload with session tracking and save/load
-- Implement HoleData resource and medal calculation
-- Wire GameState into hole complete overlay — best score, medal display
+- Build main menu scene and set as project main scene — mode selection (Stroke Play vs Time Trial) lives here
+- Full HUD pass — move dash indicator to UI, add timer display, medal display
 - Build scorecard/end-of-hole screen (full pass)
-- Build main menu scene and set as project main scene
-- Full HUD pass — move dash indicator to UI, add timer, medal display
+- Wire Time Trial mode — GameState timer is implemented, needs mode selection from main menu to activate
+- Create real HoleData .tres files per hole with tuned thresholds — deferred until level design begins
 - Enemy design and implementation for stroke play
 - Transitional platforming level prototype
 - Adventure mode sequencer (long term)
