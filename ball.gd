@@ -102,7 +102,7 @@ func _handle_aiming(delta: float) -> void:
 			aim_angle = -PI
 	else:
 		var input := Input.get_axis("ui_left", "ui_right")
-		aim_angle = clampf(aim_angle + input * aim_rotation_speed * delta, -PI, 0.0)
+		aim_angle = aim_angle + input * aim_rotation_speed * delta
 	_update_aim_arrow()
 
 func _update_aim_arrow() -> void:

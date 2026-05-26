@@ -111,7 +111,7 @@ Jumps away from the wall horizontally — not straight up. Designed for lateral 
 
 #### Dash
 
-Horizontal only. Acceleration-based burst that decelerates naturally. Refreshes on landing only. Green/red indicator shows availability — currently displayed in world space above the player.
+Horizontal only. Acceleration-based burst that decelerates naturally. Aerial only — dash is only available while airborne. Refreshes on landing. Green/red indicator shows availability — currently displayed in world space above the player.
 
 | Variable | Current Value | Effect |
 | :---- | :---- | :---- |
@@ -456,17 +456,29 @@ Simple functional HUD for testing. Full HUD pass deferred until later.
 
 | Element | Visibility | Notes |
 | :---- | :---- | :---- |
-| Power Bar | AIMING through IN_FLIGHT | Shows from aiming start. Fills during POWER only. 200x16px, yellow fill. |
-| Stroke Counter | Always | Top left. Increments on stroke_taken signal. Format: Strokes: N |
+| Stroke Counter | Stroke Play only | Top left. Increments on stroke_taken signal. Format: Strokes: N |
+| Timer | Time Trial only | Counts up from 0 using GameState.elapsed_time. Format: M:SS.cc |
+
+HUD is mode-aware on _ready — the correct element is shown and the other hidden based on GameState.current_mode.
 
 ### 10.2 Hole Complete Overlay
 
-Triggered after hole completion with a configurable delay (default 0.8s). Handles end-of-hole flow until full scorecard is implemented.
+Triggered after hole completion with a configurable delay (default 0.8s). Mode-aware display.
 
-- Darkened overlay (Color 0,0,0 alpha 0.6) covers full viewport
-- Centered panel showing: hole complete title, stroke count, best score placeholder
+Stroke Play:
+
+- Stroke count and best strokes displayed
+- Medal emoji from GameState records
+
+Time Trial:
+
+- Current run time and best time displayed in M:SS.cc format
+- Best time persisted via GameState save — correct comparison ensures a bad run never overwrites a good one (best_time == 0.0 treated as no record)
+
+Both modes:
+
 - Restart button reloads current scene
-- Best score and medal display slots present in UI, ready to be wired to GameState when implemented
+- Main Menu button returns to scenes/ui/main_menu/main_menu.tscn
 
 ---
 
@@ -514,12 +526,7 @@ Not required currently. Revisit if repository exceeds 1–2GB or asset replaceme
 
 Roughly prioritised — subject to change:
 
-- Implement GameState autoload with session tracking and save/load
-- Implement HoleData resource and medal calculation
-- Wire GameState into hole complete overlay — best score, medal display
-- Build scorecard/end-of-hole screen (full pass)
-- Build main menu scene and set as project main scene
-- Full HUD pass — move dash indicator to UI, add timer, medal display
+- Full HUD pass — move dash indicator from world space into UI, medal display, general cleanup
 - Enemy design and implementation for stroke play
 - Transitional platforming level prototype
 - Adventure mode sequencer (long term)

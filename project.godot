@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GOLFR"
-run/main_scene="uid://cg7pfp0hk0067"
+run/main_scene="uid://du6bbpnl6geom"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
