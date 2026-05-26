@@ -105,6 +105,18 @@ layout_mode = 2
 text = "Best: -"
 horizontal_alignment = 1
 
+[node name="CurrentTimeLabel" type="Label" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000012]
+visible = false
+layout_mode = 2
+text = "Time: 0:00.00"
+horizontal_alignment = 1
+
+[node name="BestTimeLabel" type="Label" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000013]
+visible = false
+layout_mode = 2
+text = "Best: 0:00.00"
+horizontal_alignment = 1
+
 [node name="RestartButton" type="Button" parent="HoleCompleteUI/Panel/VBoxContainer" unique_id=200000011]
 layout_mode = 2
 text = "Restart"

@@ -90,8 +90,8 @@ func complete_hole() -> void:
 	if rec["best_strokes"] == -1 or current_strokes < rec["best_strokes"]:
 		rec["best_strokes"] = current_strokes
 
-	# Update best time (lower is better; -1.0 means no record yet)
-	if rec["best_time"] < 0.0 or current_time < rec["best_time"]:
+	# Update best time (lower is better; <= 0.0 means no valid record)
+	if rec["best_time"] <= 0.0 or current_time < rec["best_time"]:
 		rec["best_time"] = current_time
 
 	# Update medals — only upgrade, never downgrade

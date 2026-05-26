@@ -8,9 +8,16 @@ var _stroke_count: int = 0
 @onready var background_rect: ColorRect = $Control/PowerBar/BackgroundRect
 @onready var fill_rect: ColorRect = $Control/PowerBar/FillRect
 @onready var stroke_label: Label = $Control/StrokeLabel
+@onready var timer_label: Label = $Control/TimerLabel
 
 func _ready() -> void:
 	power_bar.hide()
+	if GameState.current_mode == GameState.Mode.TIME_TRIAL:
+		stroke_label.visible = false
+		timer_label.visible = true
+	else:
+		stroke_label.visible = true
+		timer_label.visible = false
 	_ball = get_tree().get_first_node_in_group("golf_ball")
 	if _ball:
 		_ball.ball_state_changed.connect(_on_ball_state_changed)
@@ -19,6 +26,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _ball and _ball_state == _ball.State.POWER:
 		fill_rect.size.x = background_rect.size.x * _ball.current_power
+	if GameState.current_mode == GameState.Mode.TIME_TRIAL:
+		timer_label.text = format_time(GameState.current_time)
+
+func format_time(t: float) -> String:
+	var minutes := int(t) / 60
+	var seconds := int(t) % 60
+	var centiseconds := int(fmod(t, 1.0) * 100)
+	return "%d:%02d.%02d" % [minutes, seconds, centiseconds]
 
 func _on_ball_state_changed(new_state: int) -> void:
 	_ball_state = new_state
