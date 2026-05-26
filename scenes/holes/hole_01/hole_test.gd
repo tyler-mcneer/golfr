@@ -14,6 +14,7 @@ var _player: CharacterBody2D = null
 @onready var current_time_label: Label = $HoleCompleteUI/Panel/VBoxContainer/CurrentTimeLabel
 @onready var best_time_label: Label = $HoleCompleteUI/Panel/VBoxContainer/BestTimeLabel
 @onready var restart_button: Button = $HoleCompleteUI/Panel/VBoxContainer/RestartButton
+@onready var main_menu_button: Button = $HoleCompleteUI/Panel/VBoxContainer/MainMenuButton
 @onready var ball = get_tree().get_first_node_in_group("golf_ball")
 
 func _ready() -> void:
@@ -27,6 +28,7 @@ func _ready() -> void:
 
 	green.hole_completed.connect(_on_hole_completed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_pressed)
 	hole_complete_ui.visible = false
 
 	GameState.start_hole("hole_test", GameState.current_mode, hole_data)
@@ -89,3 +91,6 @@ func format_time(t: float) -> String:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+func _on_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu/main_menu.tscn")
