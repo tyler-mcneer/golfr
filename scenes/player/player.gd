@@ -134,7 +134,7 @@ func _handle_wall_jump() -> void:
 func _handle_dash() -> void:
 	if is_dashing:
 		return
-	if Input.is_action_just_pressed("dash") and dash_available:
+	if Input.is_action_just_pressed("dash") and dash_available and not is_on_floor():
 		is_dashing = true
 		dash_available = false
 		velocity.x = dash_direction * dash_initial_speed
